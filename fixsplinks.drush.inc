@@ -38,7 +38,6 @@ function drush_fixsplinks_replace_validate() {
  * detected, it will exit.
  */
 function drush_fixsplinks_replace() {
-  list ($search, $replace) = func_get_args();
   $search = 'https?://(www\.)?(?<subdomein>[^.]+)\.sp\.nl';
   $replace = 'https://\\2.sp.nl';
 
