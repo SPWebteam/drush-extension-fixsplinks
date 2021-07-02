@@ -38,9 +38,6 @@ function drush_fixsplinks_replace_validate() {
  * detected, it will exit.
  */
 function drush_fixsplinks_replace() {
-  $search = 'https?://(www\.)?([A-Za-z0-9_\-]+)\.sp\.nl';
-  $replace = 'https://\\2.sp.nl';
-
   drush_print(dt('Going fix links in all text fields in all bundles and all custom blocks on @site', array('@site' => variable_get('site_name', 'Drupal'))));
 
   $continue = drush_confirm(dt('There is no undo. Have you just created a database backup?'));
@@ -55,14 +52,15 @@ function drush_fixsplinks_replace() {
     return 0;
   }
 
-  switch (drush_drupal_major_version()) {
-    case 7:
-      return _drush_fixsplinks_replace_d7($search, $replace);
+  drush_print('Replacing all http:// with https://.');
+  $search = 'http://';
+  $replace = 'https://';
+  _drush_fixsplinks_replace_d7($search, $replace);
 
-    default:
-      drush_log(dt('This version of Drupal is unsupported.'), 'error');
-      return 0;
-  }
+  drush_print('Replacing all https://www.xxxx.sp.nl like links with https://xxxx.sp.nl.');
+  $search = 'https://www\.([A-Za-z0-9_\-]+)\.sp\.nl';
+  $replace = 'https://\\1.sp.nl';
+  return _drush_fixsplinks_replace_d7($search, $replace);
 }
 
 /**
