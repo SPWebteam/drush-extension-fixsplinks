@@ -38,7 +38,7 @@ function drush_fixsplinks_replace_validate() {
  * detected, it will exit.
  */
 function drush_fixsplinks_replace() {
-  $search = 'https?://(www\.)?(?<subdomein>[^.]+)\.sp\.nl';
+  $search = 'https?://(www\.)?([A-Za-z0-9_\-]+)\.sp\.nl';
   $replace = 'https://\\2.sp.nl';
 
   drush_print(dt('Going fix links in all text fields in all bundles and all custom blocks on @site', array('@site' => variable_get('site_name', 'Drupal'))));
