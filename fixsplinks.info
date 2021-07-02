@@ -1,0 +1,4 @@
+name = Fix SP links
+description = Fixes links like http://www.weert.sp.nl -> https://weert.sp.nl.
+
+core = 7.x
