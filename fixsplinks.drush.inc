@@ -52,14 +52,9 @@ function drush_fixsplinks_replace() {
     return 0;
   }
 
-  drush_print('Replacing all http:// with https://.');
-  $search = 'http://';
-  $replace = 'https://';
-  _drush_fixsplinks_replace_d7($search, $replace);
-
-  drush_print('Replacing all https://www.xxxx.sp.nl like links with https://xxxx.sp.nl.');
-  $search = 'https://www\.([A-Za-z0-9_\-]+)\.sp\.nl';
-  $replace = 'https://\\1.sp.nl';
+  drush_print('Fixing all http://www.xxxx.sp.nl like links with https://xxxx.sp.nl.');
+  $search = 'https?://(www\.)?([A-Za-z0-9_\-]+)\.sp\.nl';
+  $replace = 'https://\\2.sp.nl';
   return _drush_fixsplinks_replace_d7($search, $replace);
 }
 
