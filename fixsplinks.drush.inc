@@ -53,8 +53,8 @@ function drush_fixsplinks_replace() {
   }
 
   drush_print('Fixing all http://www.xxxx.sp.nl like links with https://xxxx.sp.nl.');
-  $search = 'https?://(www\.)?([A-Za-z0-9_\-]+)\.sp\.nl';
-  $replace = 'https://\\2.sp.nl';
+  $search = 'https?://(www\.)?(([A-Za-z0-9_\-]+)\.)?sp\.nl';
+  $replace = 'https://\\2sp.nl';
   return _drush_fixsplinks_replace_d7($search, $replace);
 }
 
